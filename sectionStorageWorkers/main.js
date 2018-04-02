@@ -31,6 +31,17 @@ function init() {
     setSVal.onclick = function () {
         window.sessionStorage.testKey = inputVal.value;
     };
+
+
+
+    let worker = new Worker('task.js'),
+        workerEl = document.getElementById('worker');
+
+    worker.addEventListener("message", function (e) {
+        workerEl.innerHTML = '<p>'+e.data+'</p>';
+    }, true);
+
+    worker.postMessage("");//run fibo worker
 }
 
 window.addEventListener('load', init, false);
